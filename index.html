@@ -3,75 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>معرض الفنون - الترحيب</title>
+  <title>المعرض الفني - أهلاً بكم</title>
   <style>
-    body { 
-      font-family: system-ui, sans-serif; 
-      text-align: center; 
-      background-color: #f7f4ef; /* خلفية بيج دافئة */
-      padding: 20px; 
-      color: #4a3b32; /* خط بني غامق أنيق */
-    }
-    .card { 
-      background: #ffffff; 
-      padding: 30px 20px; 
-      border-radius: 16px; 
-      box-shadow: 0 4px 15px rgba(74, 59, 50, 0.08); 
-      max-width: 350px; 
-      margin: auto; 
-      border: 1px solid #e8dfd8;
-    }
-    .logo { 
-      width: 110px; 
-      height: auto; 
-      margin-bottom: 15px; 
-      border-radius: 8px; 
-    }
-    h2 {
-      color: #3d2e24; /* بني دافئ للعنوان */
-    }
-    .status { 
-      background: #f2ebd9; /* بيج فاتح للصندوق */
-      color: #5c4328; /* بني دافئ للنص */
-      padding: 12px; 
-      border-radius: 8px; 
-      font-size: 13px; 
-      margin: 15px 0; 
-      line-height: 1.5; 
-      border: 1px solid #e0d1be;
-    }
-    .team { 
-      margin-top: 25px; 
-      border-top: 1px solid #eae1d9; 
-      padding-top: 15px; 
-      font-size: 13px; 
-      color: #7a685c; 
-      line-height: 1.6; 
-    }
+    body { font-family: system-ui, sans-serif; text-align: center; background-color: #f7f4ef; padding: 20px; color: #4a3b32; }
+    .card { background: #ffffff; padding: 30px 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(74, 59, 50, 0.08); max-width: 380px; margin: 40px auto; border: 1px solid #e8dfd8; }
+    .logo { width: 120px; height: auto; margin-bottom: 15px; border-radius: 8px; }
+    h1 { color: #3d2e24; font-size: 22px; margin-bottom: 10px; }
+    p { font-size: 15px; line-height: 1.6; color: #6e5a4e; }
+    .status { margin-top: 20px; font-weight: bold; color: #8c6d58; font-size: 14px; }
   </style>
 </head>
 <body>
-
   <div class="card">
     <img src="logo.png" alt="اللوجو" class="logo">
-    <h2>أهلاً بكم في المعرض الفني 🎨</h2>
-    
-    <div class="status">
-      ✓ تم تجهيز الدليل الصوتي للمعرض بنجاح.<br>يمكنك الآن التجول ومسح أكواد اللوحات بدون الحاجة للإنترنت!
-    </div>
-
-    <div class="team">
-      <p><strong>فريق العمل:</strong><br>
-      المشرفة / أ. رهف السناني<br>
-      بلقيس المحزمي | مودة روشن | أمجاد محمد | تالا</p>
-    </div>
+    <h1>مرحباً بكم في المعرض الفني 🎨</h1>
+    <p>تم تحميل محتوى المعرض والصوتيات بنجاح على جهازك.</p>
+    <p>يمكنك الآن التنقل بين اللوحات ومسح الباركود الخاص بكل لوحة للاستماع إلى الشرح الصوتي حتى بدون اتصال بالإنترنت!</p>
+    <div id="status" class="status">جاري تجهيز الملفات للعمل بدون إنترنت...</div>
   </div>
 
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js');
-      });
+      navigator.serviceWorker.register('./sw.js')
+        .then(() => {
+          document.getElementById('status').innerText = '✅ المعرض جاهز للعمل بدون إنترنت!';
+        })
+        .catch(() => {
+          document.getElementById('status').innerText = '⚠️ اكتمل التحضير.';
+        });
     }
   </script>
 </body>
