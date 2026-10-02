@@ -1,4 +1,130 @@
-currentPercent++;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المعرض الفني - أهلاً بكم</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      text-align: center;
+      background-color: #f7f4ef;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+      color: #333;
+    }
+    .card {
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      max-width: 440px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .logo {
+      width: 130px;
+      height: auto;
+      margin-bottom: 25px;
+    }
+    h1 {
+      color: #222;
+      font-size: 26px;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    .description {
+      color: #666;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    .progress-container {
+      width: 100%;
+      background: #efebe7;
+      border-radius: 20px;
+      height: 16px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      border: 1px solid #dcd4cc;
+    }
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #8c6d58, #b5947f);
+      border-radius: 20px;
+      transition: width 0.1s linear;
+    }
+    .status-text {
+      font-weight: bold;
+      color: #8c6d58;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .ready-message {
+      display: none;
+      color: #333;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-top: 15px;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 15px;
+      font-weight: 500;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <img src="logo.png" alt="فن يسمع" class="logo">
+    <h1>مرحباً بكم في المعرض الفني 🎨</h1>
+
+    <div id="loadingSection">
+      <p class="description">جاري تحميل محتوى المعرض والصوتيات على جهازك...</p>
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="status-text" id="statusText">جاري التحميل 0%</div>
+    </div>
+
+    <div class="ready-message" id="readyMessage">
+      <p class="description">تم تحميل محتوى المعرض والصوتيات بنجاح على جهازك.</p>
+      <p class="description">يمكنك الآن التنقل بين اللوحات ومسح الباركود الخاص بكل لوحة للاستماع إلى الشرح الصوتي حتى بدون اتصال بالإنتـرنت!</p>
+      <div class="badge">✅ المعرض جاهز للعمل بدون إنترنت!</div>
+    </div>
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW fail:', err));
+    }
+
+    const urlsToPreload = [
+      './logo.png',
+      './art1.html','./art2.html','./art3.html','./art4.html','./art5.html','./art6.html',
+      './AUD-20261002-WA0009.mp3','./AUD-20261002-WA0010.mp3','./AUD-20261002-WA0011.mp3',
+      './AUD-20261002-WA0057.mp3','./AUD-20261002-WA0058.mp3','./AUD-20261002-WA0059.mp3'
+    ];
+
+    const progressBar = document.getElementById('progressBar');
+    const statusText = document.getElementById('statusText');
+    const loadingSection = document.getElementById('loadingSection');
+    const readyMessage = document.getElementById('readyMessage');
+
+    let currentPercent = 0;
+    let targetPercent = 0;
+
+    const interval = setInterval(() => {
+      if (currentPercent < targetPercent) {
+        currentPercent++;
         progressBar.style.width = currentPercent + '%';
         statusText.innerText = جاري التحميل ${currentPercent}%;
       }
@@ -10,9 +136,7 @@ currentPercent++;
           readyMessage.style.display = 'block';
         }, 500);
       }
-    }, 35);
-
-    async function preloadAssets() {
+    }, 35);async function preloadAssets() {
       let cache = null;
       try {
         if ('caches' in window) {
