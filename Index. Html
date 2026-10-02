@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معرض الفنون - الصفحة الرئيسية</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background: #f9f9f9; padding: 20px; }
+    .logo { max-width: 150px; border-radius: 10px; margin-bottom: 15px; }
+    .card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    h1 { color: #333; font-size: 22px; }
+    p { color: #666; font-size: 14px; }
+    .team { margin-top: 20px; font-size: 12px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="logo.png" alt="اللوجو" class="logo">
+    <h1>أهلاً بكم في المعرض الفني 🎨</h1>
+    <p>تم تحميل جميع المواد الصوتية بنجاح! يمكنك الآن التجول بداخل المعرض ومسح أكواد اللوحات حتى بدون اتصال بالإنترنت.</p>
+    <div class="team">
+      <p>فريق العمل: [ المشرفة / أ.رهف السناني 
+بلقيس المحرّمي
+مودة روشن 
+أمجاد محمد
+تالا]</p>
+    </div>
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+</body>
+</html>
