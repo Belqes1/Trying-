@@ -3,34 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>معرض الفنون - الصفحة الرئيسية</title>
+  <title>معرض الفنون - الوصف الصوتي</title>
   <style>
-    body { font-family: sans-serif; text-align: center; background: #f9f9f9; padding: 20px; }
-    .logo { max-width: 150px; border-radius: 10px; margin-bottom: 15px; }
-    .card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    h1 { color: #333; font-size: 22px; }
-    p { color: #666; font-size: 14px; }
-    .team { margin-top: 20px; font-size: 12px; color: #888; }
+    body { 
+      font-family: system-ui, sans-serif; 
+      text-align: center; 
+      background: #fafafa; 
+      padding: 20px; 
+      color: #333; 
+    }
+    .card { 
+      background: white; 
+      padding: 30px 20px; 
+      border-radius: 16px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06); 
+      max-width: 350px; 
+      margin: auto; 
+    }
+    .logo { 
+      width: 110px; 
+      height: auto; 
+      margin-bottom: 15px; 
+      border-radius: 8px; 
+    }
+    h2 {
+      margin-top: 10px;
+      color: #222;
+    }
+    audio { 
+      width: 100%; 
+      margin: 20px 0; 
+    }
+    .team { 
+      margin-top: 25px; 
+      border-top: 1px solid #eee; 
+      padding-top: 15px; 
+      font-size: 13px; 
+      color: #777; 
+      line-height: 1.6; 
+    }
   </style>
 </head>
 <body>
+
   <div class="card">
+    <!-- 1. الشعار -->
     <img src="logo.png" alt="اللوجو" class="logo">
-    <h1>أهلاً بكم في المعرض الفني 🎨</h1>
-    <p>تم تحميل جميع المواد الصوتية بنجاح! يمكنك الآن التجول بداخل المعرض ومسح أكواد اللوحات حتى بدون اتصال بالإنترنت.</p>
+
+    <!-- 2. العنوان الرئيسي -->
+    <h2>اللوحة الأولى 🎨</h2>
+
+    <!-- 3. مشغل الصوت المباشر -->
+    <audio controls>
+      <source src="AUD-20261002-WA0009.mp3" type="audio/mpeg">
+      متصفحك لا يدعم مشغل الصوت.
+    </audio>
+
+    <!-- 4. أسماء الفريق والمشرفة -->
     <div class="team">
-      <p>فريق العمل: [ المشرفة / أ.رهف السناني 
-بلقيس المحرّمي
-مودة روشن 
-أمجاد محمد
-تالا]</p>
+      <p><strong>فريق العمل:</strong><br>
+      المشرفة / أ. رهف السناني<br>
+      بلقيس المحزمي | مودة روشن | أمجاد محمد|تالة الدويدري|ثويبة عبدالله</p>
     </div>
   </div>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
-    }
-  </script>
 </body>
 </html>
