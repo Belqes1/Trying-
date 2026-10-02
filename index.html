@@ -3,69 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>معرض الفنون - الوصف الصوتي</title>
+  <title>معرض الفنون - الترحيب</title>
   <style>
-    body { 
-      font-family: system-ui, sans-serif; 
-      text-align: center; 
-      background: #fafafa; 
-      padding: 20px; 
-      color: #333; 
-    }
-    .card { 
-      background: white; 
-      padding: 30px 20px; 
-      border-radius: 16px; 
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06); 
-      max-width: 350px; 
-      margin: auto; 
-    }
-    .logo { 
-      width: 110px; 
-      height: auto; 
-      margin-bottom: 15px; 
-      border-radius: 8px; 
-    }
-    h2 {
-      margin-top: 10px;
-      color: #222;
-    }
-    audio { 
-      width: 100%; 
-      margin: 20px 0; 
-    }
-    .team { 
-      margin-top: 25px; 
-      border-top: 1px solid #eee; 
-      padding-top: 15px; 
-      font-size: 13px; 
-      color: #777; 
-      line-height: 1.6; 
-    }
+    body { font-family: system-ui, sans-serif; text-align: center; background: #fafafa; padding: 20px; color: #333; }
+    .card { background: white; padding: 30px 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); max-width: 350px; margin: auto; }
+    .logo { width: 110px; height: auto; margin-bottom: 15px; border-radius: 8px; }
+    .status { background: #e8f5e9; color: #2e7d32; padding: 12px; border-radius: 8px; font-size: 13px; margin: 15px 0; line-height: 1.5; }
+    .team { margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px; font-size: 13px; color: #777; line-height: 1.6; }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <!-- 1. الشعار -->
     <img src="logo.png" alt="اللوجو" class="logo">
+    <h2>أهلاً بكم في المعرض الفني 🎨</h2>
+    
+    <div class="status">
+      ✓ تم تجهيز الدليل الصوتي للمعرض بنجاح.<br>يمكنك الآن التجول ومسح أكواد اللوحات بدون الحاجة للإنترنت!
+    </div>
 
-    <!-- 2. العنوان الرئيسي -->
-    <h2>اللوحة الأولى 🎨</h2>
-
-    <!-- 3. مشغل الصوت المباشر -->
-    <audio controls>
-      <source src="AUD-20261002-WA0009.mp3" type="audio/mpeg">
-      متصفحك لا يدعم مشغل الصوت.
-    </audio>
-
-    <!-- 4. أسماء الفريق والمشرفة -->
     <div class="team">
       <p><strong>فريق العمل:</strong><br>
       المشرفة / أ. رهف السناني<br>
-      بلقيس المحزمي | مودة روشن | أمجاد محمد|تالة الدويدري|ثويبة عبدالله</p>
+      بلقيس المحزمي | مودة روشن | أمجاد محمد | تالا</p>
     </div>
   </div>
 
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
+  </script>
 </body>
 </html>
