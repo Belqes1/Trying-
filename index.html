@@ -141,9 +141,7 @@
           }
         } catch (error) {
           console.log('خطأ في تحميل:', url, error);
-        }
-        
-        loadedCount++;
+       } loadedCount++;
         const percent = Math.round((loadedCount / totalFiles) * 100);
         progressBar.style.width = percent + '%';
         statusText.innerText = جاري التحميل ${percent}%;
