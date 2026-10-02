@@ -1,67 +1,22 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>معرض اللوحات - التحميل</title>
-  <style>
-    body { font-family: system-ui, sans-serif; text-align: center; background: #f7f4ef; padding: 30px 20px; color: #4a3b32; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 80vh; margin: 0; }
-    .card { background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 8px 25px rgba(74,59,50,0.1); max-width: 380px; width: 100%; border: 1px solid #e8dfd8; box-sizing: border-box; }
-    .logo { width: 110px; height: auto; margin-bottom: 15px; border-radius: 10px; }
-    h1 { color: #3d2e24; font-size: 22px; margin-bottom: 8px; }
-    p { color: #7a6a5d; font-size: 14px; margin-bottom: 25px; line-height: 1.5; }
-    .progress-container { width: 100%; background: #efebe7; border-radius: 12px; height: 22px; overflow: hidden; margin-bottom: 12px; border: 1px solid #dcd4cc; }
-    .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #8c6d58, #b5947f); border-radius: 12px; transition: width 0.1s linear; }
-    .status-text { font-weight: bold; color: #5c493c; font-size: 15px; }
-    .ready-badge { display: none; background: #e6f4ea; color: #1e7e34; padding: 10px 15px; border-radius: 10px; font-weight: bold; margin-top: 15px; border: 1px solid #c3e6cb; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <img src="logo.png" alt="اللوجو" class="logo">
-    <h1>أهلاً بك في المعرض 🎨</h1>
-    <p>جاري تجهيز وتحميل الملفات الصوتية لتتمكن من استعراض المعرض بدون إنترنت...</p>
-    <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
-    <div class="status-text" id="statusText">جاري التحميل 0%</div>
-    <div class="ready-badge" id="readyBadge">✅ تم التحميل بنجاح! يمكنك الآن إيقاف الإنترنت والتجول في المعرض.</div>
-  </div>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW register fail:', err));
-    }
-    const urlsToPreload = [
-      './logo.png',
-      './art1.html','./art2.html','./art3.html','./art4.html','./art5.html','./art6.html',
-      './AUD-20261002-WA0009.mp3','./AUD-20261002-WA0010.mp3','./AUD-20261002-WA0011.mp3',
-      './AUD-20261002-WA0057.mp3','./AUD-20261002-WA0058.mp3','./AUD-20261002-WA0059.mp3'
-    ];
-
-    const progressBar = document.getElementById('progressBar');
-    const statusText = document.getElementById('statusText');
-    const readyBadge = document.getElementById('readyBadge');
-
-    let currentPercent = 0;
-    let targetPercent = 0;
-
-    // تحديث النسبة المئوية بسلاسة رقم برقم (1%, 2%, 3% ...)
-    const interval = setInterval(() => {
-      if (currentPercent < targetPercent) {
-        currentPercent++;
+currentPercent++;
         progressBar.style.width = currentPercent + '%';
         statusText.innerText = جاري التحميل ${currentPercent}%;
       }
+      
       if (currentPercent >= 100) {
         clearInterval(interval);
-        statusText.innerText = "اكتمل التحميل 100%";
-        readyBadge.style.display = "block";
+        setTimeout(() => {
+          loadingSection.style.display = 'none';
+          readyMessage.style.display = 'block';
+        }, 500);
       }
-    }, 30); // التحديث كل 30 ملي ثانية ليعطي حركة سلسة تصاعدية
+    }, 35);
 
     async function preloadAssets() {
       let cache = null;
       try {
         if ('caches' in window) {
-          cache = await caches.open('art-gallery-v3');
+          cache = await caches.open('art-gallery-v4');
         }
       } catch (e) { console.log('Cache error:', e); }
 
@@ -85,5 +40,6 @@
 
     window.addEventListener('DOMContentLoaded', preloadAssets);
   </script>
+
 </body>
 </html>
